@@ -1,0 +1,27 @@
+// const { MongoClient } = require("mongodb");
+// const uri = process.env.DB;
+
+// const client = new MongoClient(uri, options);
+// const database = client.db("test");
+// const products = database.collection("products");
+// const orders = database.collection("orders");
+
+// module.exports = { products, orders };
+const { MongoClient } = require("mongodb");
+const uri = process.env.DB;
+const options = {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+};
+let client;
+
+const getDb = () => {
+  if (!client) {
+    client = new MongoClient(uri, options);
+  }
+  const database = client.db("test");
+  const products = database.collection("products");
+  const orders = database.collection("orders");
+  return { products, orders };
+};
+module.exports = getDb;

@@ -1,10 +1,11 @@
-require('dotenv').config();
+require("dotenv").config();
 const express = require("express");
 const productRouter = require("./router/productRoutes");
 const orderRouter = require("./router/orderRoutes");
 const bodyParser = require("body-parser");
 const app = express();
 const PORT = 3000;
+const paymentRoutes = require("./router/paymentRoutes");
 
 app.use(bodyParser.json());
 app.get("/", (req, res) => {
@@ -15,3 +16,4 @@ app.use("/orders", orderRouter);
 app.listen(PORT, () => {
   console.log("API is listening on port ", PORT);
 });
+app.use("/payments", paymentRoutes);
